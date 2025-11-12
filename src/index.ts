@@ -5,6 +5,7 @@ import { PersistencePlugin, Document } from '@teriologia/sonicdb';
 export class NodeFSPersistence<T extends Document> implements PersistencePlugin<T> {
     public name = "NodeFSPersistence";
     private filePath: string;
+    private isWriting = false;
     
     constructor(fileName: string, private options: { basePath?: string } = {}) {
         const basePath = options.basePath || process.cwd();
@@ -12,8 +13,23 @@ export class NodeFSPersistence<T extends Document> implements PersistencePlugin<
     }
 
     async saveData(data: (T | null)[]): Promise<void> {
-        const jsonString = JSON.stringify(data);
-        await fs.promises.writeFile(this.filePath, jsonString, 'utf8'); 
+        if (this.isWriting) {
+            console.log("persistence is busy");
+            return;
+        }
+
+        this.isWriting = true; 
+        
+        
+        try {
+            const jsonString = JSON.stringify(data);
+            await fs.promises.writeFile(this.filePath, jsonString, 'utf8'); 
+        } catch (error) {
+            console.error("Error while writing: ", error);
+            throw error;
+        } finally {
+            this.isWriting = false;
+        }
     }
 
     async loadData(): Promise<T[] | null> {
