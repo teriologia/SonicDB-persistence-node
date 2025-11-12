@@ -1,6 +1,6 @@
 {
   "name": "@teriologia/sonicdb-persistence-node",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Persist mode to sonicDB for Node(FS)",
   "main": "dist/cjs/index.js",
   "module": "dist/mjs/index.js",
