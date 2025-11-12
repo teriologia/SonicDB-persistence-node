@@ -45,6 +45,12 @@ npm install @teriologia/sonicdb @teriologia/sonicdb-persistence-node
 
 The loadPersistentData() method is crucial as it reads the existing file from disk and rebuilds the in-memory indexes of SonicDB.
 
+  **Import**
+```typescript
+import { NodeFSPersistence } from '@teriologia/sonicdb-persistence-node'; //recommended
+//const { NodeFSPersistence } = require('@teriologia/sonicdb-persistence-node'); //for commonJS
+````
+  **Usage**
 ```typescript
   const persistencePlugin = new NodeFSPersistence('users.json');
     

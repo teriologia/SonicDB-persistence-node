@@ -33,6 +33,6 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@teriologia/sonicdb": "^0.2.4"
+    "@teriologia/sonicdb": "^0.2.5"
   }
 }
